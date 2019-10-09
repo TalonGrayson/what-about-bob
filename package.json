@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "Tiny Bob API integration for getting my holiday status",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "request": "^2.88.0"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }
