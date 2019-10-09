@@ -3,7 +3,7 @@ const express = require("express");
 
 const keys = require("./src/config/keys");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const options = {
   headers: {
@@ -45,9 +45,28 @@ app.get("/:name", (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  console.log(keys.access_token);
+
   request(options, function(error, response, body) {
     if (error) throw new Error(error);
-    res.json(JSON.parse(body));
+
+    persons = [];
+
+    JSON.parse(body).outs.forEach(person => {
+      persons.push({
+        employeeId: person.employeeId,
+        policyTypeDisplayName: person.policyTypeDisplayName,
+        employeeDisplayName: person.employeeDisplayName,
+        startDate: person.startDate,
+        endDate: person.endDate,
+        startDatePortion: person.startDatePortion,
+        endDatePortion: person.endDatePortion,
+        hours: person.hours,
+        requestRangeType: person.requestRangeType
+      });
+    });
+
+    res.json(persons);
   });
 });
 
